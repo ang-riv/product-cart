@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import data from "./data.json";
 import Modal from "./components/Modal";
+import ProductCard from "./components/ProductCard";
+import waffle from "./assets/images/image-waffle-mobile.jpg";
 function App() {
+  // * app info
+  const appTitle = "Desserts";
   const products = [data[0], data[1], data[2]];
+  const proImgs = data[0].image;
+  const im = proImgs.mobile;
 
   // holds all the products
   const [cart, setCart] = useState([]);
@@ -59,68 +65,60 @@ function App() {
   };
 
   return (
-    <>
-      {/* products */}
-      {!showM && <Modal />}
-
-      <div className="w-52 h-fit outline outline-red-300 p-2 m-2">
-        {products.map((item, index) => (
-          <div key={index}>
-            {" "}
-            <p>{item.category}</p>
-            <p>{item.name}</p>
-            <p>{item.price}</p>
-            <button
-              className="btn px-5 bg-red-300 rounded-2xl"
-              onClick={() => handleAddProduct(item)}
-            >
-              Add
-            </button>
-          </div>
-        ))}
-      </div>
-
-      {/*  cart */}
-      <div className="size-52 outline outline-red-400 p-2 m-2">
-        {filteredCart.map((product, index) => (
-          <div key={index}>
-            <p>{product.name}</p>
-            <p>{product.amount}</p>
-            <p>{product.amount * product.price}</p>
-            <button
-              className="p-1 bg-blue-200"
-              onClick={() => handleIncrease(product)}
-            >
-              +
-            </button>
-            <button
-              className="p-1 bg-green-200"
-              onClick={() => handleDecrease(product)}
-            >
-              -
-            </button>
-            <button
-              className="p-1 bg-purple-200"
-              onClick={() => handleRemove(product)}
-            >
-              *
-            </button>
-          </div>
-        ))}
-      </div>
-
-      <div className="attribution">
-        Challenge by{" "}
-        <a href="https://www.frontendmentor.io?ref=challenge">
-          Frontend Mentor
-        </a>
-        . Coded by{" "}
-        <a href="https://www.frontendmentor.io/profile/ang-riv">
-          Angela Rivera
-        </a>
-        .
-      </div>
-    </>
+    <div className="min-h-screen px-5 flex flex-col ">
+      <main className="h-[95vh] w-full">
+        {!showM && <Modal />}
+        <h1 className="py-5">{appTitle}</h1>
+        {/* products */}
+        <section className="w-full h-fit outline outline-red-300">
+          {products.map((product) => (
+            <ProductCard product={product} />
+          ))}
+        </section>
+        {/*  cart */}
+        <section className="h-52 w-full outline outline-red-400">
+          {filteredCart.map((product, index) => (
+            <div key={index}>
+              <p>{product.name}</p>
+              <p>{product.amount}</p>
+              <p>{product.amount * product.price}</p>
+              <button
+                className="p-1 bg-blue-200"
+                onClick={() => handleIncrease(product)}
+              >
+                +
+              </button>
+              <button
+                className="p-1 bg-green-200"
+                onClick={() => handleDecrease(product)}
+              >
+                -
+              </button>
+              <button
+                className="p-1 bg-purple-200"
+                onClick={() => handleRemove(product)}
+              >
+                *
+              </button>
+            </div>
+          ))}
+        </section>
+      </main>
+      <footer className="attribution h-[5vh] w-full flex items-end justify-center">
+        <p>
+          {" "}
+          Challenge by{" "}
+          <a href="https://www.frontendmentor.io?ref=challenge">
+            Frontend Mentor
+          </a>
+          . Coded by{" "}
+          <a href="https://www.frontendmentor.io/profile/ang-riv">
+            Angela Rivera
+          </a>
+          .
+        </p>
+      </footer>
+    </div>
   );
 }
 
