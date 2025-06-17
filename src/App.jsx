@@ -65,11 +65,11 @@ function App() {
 
   return (
     <div className="min-h-screen px-5 flex flex-col ">
-      <main className="h-[95vh] w-full">
+      <main className="h-[95%] w-full">
         {!showM && <Modal />}
         <h1 className="py-5">{appTitle}</h1>
         {/* products */}
-        <section className="w-full h-fit outline outline-red-300">
+        <section className="w-full h-fit">
           {products.map((product) => (
             <ProductCard product={product} filteredCart={filteredCart} />
           ))}
@@ -103,7 +103,7 @@ function App() {
           ))}
         </section>
       </main>
-      <footer className="attribution h-[5vh] w-full flex items-end justify-center">
+      <footer className="attribution h-[5%] w-full flex items-end justify-center">
         <p>
           {" "}
           Challenge by{" "}

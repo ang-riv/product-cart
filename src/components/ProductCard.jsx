@@ -2,16 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 const ProductCard = ({ product, filteredCart }) => {
   const { cart, setCart } = useContext(CartContext);
-  const { name, image, category, price, amount } = product;
+  const { name, image, category, price } = product;
   const productImage = image.mobile;
   const [quantityBtns, setQuantityBtns] = useState(false);
   const [currentAmount, setCurrentAmount] = useState(null);
 
   useEffect(() => {
-    // if there's something in the cart
     // find the item
     const currentProduct = cart.filter((item) => item.name === name);
-    // if the item has been found, then show the amount
+
     if (currentProduct.length != 0 && currentProduct[0].amount != undefined) {
       setCurrentAmount(currentProduct[0].amount);
       setQuantityBtns(true);
@@ -20,8 +19,8 @@ const ProductCard = ({ product, filteredCart }) => {
     if (currentAmount === 0) {
       setQuantityBtns(false);
     }
-    // if the item has been found
   }, [cart, filteredCart]);
+
   const handleAddProduct = (product) => {
     setCart([
       ...cart,
@@ -34,19 +33,6 @@ const ProductCard = ({ product, filteredCart }) => {
       },
     ]);
     setQuantityBtns(true);
-  };
-
-  const realAmount = () => {
-    //
-    const check = filteredCart.filter((item) => item.name === name);
-    if (check.length != 0) {
-      console.log(check[0].amount);
-      setCurrentAmount(check[0].amount);
-      setQuantityBtns(true);
-    } else {
-      console.log("at zero");
-      setQuantityBtns(false);
-    }
   };
 
   const handleIncrease = (product) => {
@@ -69,7 +55,7 @@ const ProductCard = ({ product, filteredCart }) => {
       <img
         src={productImage}
         alt=""
-        className="object-cover w-full min-h-56 rounded-[10px] outline outline-blush-400"
+        className="object-cover w-full min-h-56 rounded-[10px]"
       />
       <div className="relative -top-5 w-full flex justify-center">
         <div className="h-10 w-36 bg-purple-300 rounded-4xl outline outline-purple-400">
