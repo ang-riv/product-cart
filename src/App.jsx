@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import data from "./data.json";
 import Modal from "./components/Modal";
 import ProductCard from "./components/ProductCard";
+import { CartContext } from "./components/CartContext";
 function App() {
+  const { cart, setCart } = useContext(CartContext);
   // * app info
   const appTitle = "Desserts";
   const products = [data[0], data[1], data[2]];
@@ -10,7 +12,7 @@ function App() {
   const im = proImgs.mobile;
 
   // holds all the products
-  const [cart, setCart] = useState([]);
+  //const [cart, setCart] = useState([]);
   const [filteredCart, setFilteredCart] = useState([]);
 
   const [showM, setShowM] = useState(true);
