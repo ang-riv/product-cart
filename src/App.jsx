@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import data from "./data.json";
+import Modal from "./components/Modal";
 function App() {
   const products = [data[0], data[1], data[2]];
 
   // holds all the products
   const [cart, setCart] = useState([]);
-
   const [filteredCart, setFilteredCart] = useState([]);
+
+  const [showM, setShowM] = useState(true);
   useEffect(() => {
     // remove from filteredCart then remove from original cart
     const amounts = cart.filter((product) => product.amount != 0);
@@ -59,6 +61,8 @@ function App() {
   return (
     <>
       {/* products */}
+      {!showM && <Modal />}
+
       <div className="w-52 h-fit outline outline-red-300 p-2 m-2">
         {products.map((item, index) => (
           <div key={index}>
