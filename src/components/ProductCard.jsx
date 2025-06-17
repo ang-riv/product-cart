@@ -1,15 +1,13 @@
-import waffle from "../assets/images/image-waffle-mobile.jpg";
 const ProductCard = ({ product }) => {
   const { name, image, category, price, amount } = product;
   const productImage = image.mobile;
-  console.log(productImage);
 
   return (
     <div key={name} className="min-h-72 w-full mb-5">
       <img
         src={productImage}
         alt=""
-        className="w-full min-h-56 rounded-[10px] outline outline-blush-400"
+        className="object-cover w-full min-h-56 rounded-[10px] outline outline-blush-400"
       />
       <div className="relative -top-6 w-full flex justify-center">
         <button className="py-2.5 px-8 bg-red-300 rounded-4xl">

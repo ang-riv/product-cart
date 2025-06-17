@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import data from "./data.json";
 import Modal from "./components/Modal";
 import ProductCard from "./components/ProductCard";
-import waffle from "./assets/images/image-waffle-mobile.jpg";
 function App() {
   // * app info
   const appTitle = "Desserts";
