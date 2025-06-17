@@ -8,17 +8,15 @@ function App() {
   // * app info
   const appTitle = "Desserts";
   const products = [data[0], data[1], data[2]];
-  const proImgs = data[0].image;
-  const im = proImgs.mobile;
-
   // holds all the products
   //const [cart, setCart] = useState([]);
   const [filteredCart, setFilteredCart] = useState([]);
 
   const [showM, setShowM] = useState(true);
   useEffect(() => {
-    // remove from filteredCart then remove from original cart
+    // find only the products that are not zero
     const amounts = cart.filter((product) => product.amount != 0);
+    // show only the amounts
     const cartAmount = cart.map((item) => item.amount);
     setFilteredCart(amounts);
 
@@ -73,7 +71,7 @@ function App() {
         {/* products */}
         <section className="w-full h-fit outline outline-red-300">
           {products.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} filteredCart={filteredCart} />
           ))}
         </section>
         {/*  cart */}
