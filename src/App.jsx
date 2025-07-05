@@ -71,7 +71,7 @@ function App() {
         <section className="w-full justify-center flex flex-col items-center ">
           <h1 className="pb-5 w-full">{appTitle}</h1>
           <div className=" w-full flex justify-center sm:justify-start">
-            <div className={`w-fit h-fit gap-2 ${gridStyles}`}>
+            <div className={`w-fit h-fit gap-4 ${gridStyles}`}>
               {products.map((product) => (
                 <ProductCard product={product} filteredCart={filteredCart} />
               ))}
