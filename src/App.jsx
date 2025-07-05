@@ -62,23 +62,25 @@ function App() {
       )
     );
   };
-
+  const gridStyles = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
   return (
-    <div className="min-h-screen flex flex-col justify-between items-center">
-      <main className="h-[95%] w-full flex flex-wrap sm:flex-nowrap max-w-7xl py-[5%] px-[5%] ">
+    <div className="min-h-screen px-5 flex flex-col justify-between items-center">
+      <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%] outline outline-amber-400">
         {!showM && <Modal />}
         {/* products */}
-        <section>
-          <h1 className="pb-5">{appTitle}</h1>
-          <div className="w-fit h-fit flex flex-wrap outline outline-purple-300 gap-[5%]">
+        <section className="w-full justify-center flex flex-col items-center outline outline-amber-600">
+          <h1 className="pb-5 w-full">{appTitle}</h1>
+          <div
+            className={`w-fit h-fit outline outline-purple-300 gap-2 justify-center ${gridStyles} items-center`}
+          >
             {products.map((product) => (
               <ProductCard product={product} filteredCart={filteredCart} />
             ))}
-            <div className="h-0.5 min-w-64"></div>
+            <div className="h-0.5 min-w-64 mb-5"></div>
           </div>
         </section>
         {/*  cart */}
-        <section>
+        <section className="lg:ml-3">
           <div className="min-h-52 min-w-72 outline outline-red-400 max-w-96">
             {filteredCart.map((product, index) => (
               <div key={index}>

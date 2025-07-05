@@ -53,7 +53,7 @@ const ProductCard = ({ product, filteredCart }) => {
   return (
     <article
       key={name}
-      className="min-h-72 max-h-96 max-w-64 mb-5 border-2 border-amber-400"
+      className="min-h-72 max-h-96 max-w-[320px] mb-5 border-2 border-amber-400"
     >
       <img
         src={productImage}
