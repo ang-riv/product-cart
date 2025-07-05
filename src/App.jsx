@@ -62,26 +62,25 @@ function App() {
       )
     );
   };
-  const gridStyles = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+  const gridStyles = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ";
   return (
     <div className="min-h-screen px-5 flex flex-col justify-between items-center">
-      <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%] outline outline-amber-400">
+      <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%]">
         {!showM && <Modal />}
         {/* products */}
-        <section className="w-full justify-center flex flex-col items-center outline outline-amber-600">
+        <section className="w-full justify-center flex flex-col items-center ">
           <h1 className="pb-5 w-full">{appTitle}</h1>
-          <div
-            className={`w-fit h-fit outline outline-purple-300 gap-2 justify-center ${gridStyles} items-center`}
-          >
-            {products.map((product) => (
-              <ProductCard product={product} filteredCart={filteredCart} />
-            ))}
-            <div className="h-0.5 min-w-64 mb-5"></div>
+          <div className=" w-full flex justify-center sm:justify-start">
+            <div className={`w-fit h-fit gap-2 ${gridStyles}`}>
+              {products.map((product) => (
+                <ProductCard product={product} filteredCart={filteredCart} />
+              ))}
+            </div>
           </div>
         </section>
         {/*  cart */}
-        <section className="lg:ml-3">
-          <div className="min-h-52 min-w-72 outline outline-red-400 max-w-96">
+        <section className="md:ml-3 w-full flex justify-center md:max-w-xs">
+          <div className="h-fit min-h-60 w-full md:max-w-xs bg-amber-500">
             {filteredCart.map((product, index) => (
               <div key={index}>
                 <p>{product.name}</p>
