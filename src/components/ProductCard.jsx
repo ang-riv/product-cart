@@ -51,7 +51,10 @@ const ProductCard = ({ product, filteredCart }) => {
     );
   };
   return (
-    <div key={name} className="min-h-72 w-full mb-5">
+    <article
+      key={name}
+      className="min-h-72 max-h-96 max-w-64 mb-5 border-2 border-amber-400"
+    >
       <img
         src={productImage}
         alt=""
@@ -87,10 +90,10 @@ const ProductCard = ({ product, filteredCart }) => {
       </div>
       <div className="">
         <p>{category}</p>
-        <p>{name}</p>
+        <legend>{name}</legend>
         <p>{price}</p>
       </div>
-    </div>
+    </article>
   );
 };
 

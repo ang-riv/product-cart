@@ -64,43 +64,48 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen px-5 flex flex-col ">
-      <main className="h-[95%] w-full">
+    <div className="min-h-screen flex flex-col justify-between items-center">
+      <main className="h-[95%] w-full flex flex-wrap sm:flex-nowrap max-w-7xl py-[5%] px-[5%] ">
         {!showM && <Modal />}
-        <h1 className="py-5">{appTitle}</h1>
         {/* products */}
-        <section className="w-full h-fit">
-          {products.map((product) => (
-            <ProductCard product={product} filteredCart={filteredCart} />
-          ))}
+        <section>
+          <h1 className="pb-5">{appTitle}</h1>
+          <div className="w-fit h-fit flex flex-wrap outline outline-purple-300 gap-[5%]">
+            {products.map((product) => (
+              <ProductCard product={product} filteredCart={filteredCart} />
+            ))}
+            <div className="h-0.5 min-w-64"></div>
+          </div>
         </section>
         {/*  cart */}
-        <section className="h-52 w-full outline outline-red-400">
-          {filteredCart.map((product, index) => (
-            <div key={index}>
-              <p>{product.name}</p>
-              <p>{product.amount}</p>
-              <p>{product.amount * product.price}</p>
-              <button
-                className="p-1 bg-blue-200"
-                onClick={() => handleIncrease(product)}
-              >
-                +
-              </button>
-              <button
-                className="p-1 bg-green-200"
-                onClick={() => handleDecrease(product)}
-              >
-                -
-              </button>
-              <button
-                className="p-1 bg-purple-200"
-                onClick={() => handleRemove(product)}
-              >
-                *
-              </button>
-            </div>
-          ))}
+        <section>
+          <div className="min-h-52 min-w-72 outline outline-red-400 max-w-96">
+            {filteredCart.map((product, index) => (
+              <div key={index}>
+                <p>{product.name}</p>
+                <p>{product.amount}</p>
+                <p>{product.amount * product.price}</p>
+                <button
+                  className="p-1 bg-blue-200"
+                  onClick={() => handleIncrease(product)}
+                >
+                  +
+                </button>
+                <button
+                  className="p-1 bg-green-200"
+                  onClick={() => handleDecrease(product)}
+                >
+                  -
+                </button>
+                <button
+                  className="p-1 bg-purple-200"
+                  onClick={() => handleRemove(product)}
+                >
+                  *
+                </button>
+              </div>
+            ))}
+          </div>
         </section>
       </main>
       <footer className="attribution h-[5%] w-full flex items-end justify-center">
