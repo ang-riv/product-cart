@@ -55,12 +55,12 @@ const ProductCard = ({ product, filteredCart }) => {
       <figure
         className={`m-0 p-0 ${
           quantityBtns ? "outline-3 outline-main-red" : "outline-0"
-        } rounded-[10px]`}
+        } rounded-lg`}
       >
         <img
           src={productImage}
           alt=""
-          className="object-cover w-full min-h-56 rounded-[10px]"
+          className="object-cover w-full min-h-56 rounded-lg"
         />
       </figure>
 
