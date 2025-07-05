@@ -64,12 +64,12 @@ function App() {
   };
   const gridStyles = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ";
   return (
-    <div className="min-h-screen px-5 flex flex-col justify-between items-center">
+    <div className="min-h-screen px-5 flex flex-col justify-between items-center bg-blush-50">
       <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%]">
         {!showM && <Modal />}
         {/* products */}
         <section className="w-full justify-center flex flex-col items-center ">
-          <h1 className="pb-5 w-full">{appTitle}</h1>
+          <h1 className="pb-5 w-full font-bold">{appTitle}</h1>
           <div className=" w-full flex justify-center sm:justify-start">
             <div className={`w-fit h-fit gap-4 ${gridStyles}`}>
               {products.map((product) => (

@@ -51,47 +51,70 @@ const ProductCard = ({ product, filteredCart }) => {
     );
   };
   return (
-    <article
-      key={name}
-      className="min-h-72 max-h-96 max-w-[320px] border-2 border-amber-400"
-    >
-      <img
-        src={productImage}
-        alt=""
-        className="object-cover w-full min-h-56 rounded-[10px]"
-      />
+    <article key={name} className="min-h-72 max-h-96 max-w-[320px]">
+      <figure
+        className={`m-0 p-0 ${
+          quantityBtns ? "outline-3 outline-main-red" : "outline-0"
+        } rounded-[10px]`}
+      >
+        <img
+          src={productImage}
+          alt=""
+          className="object-cover w-full min-h-56 rounded-[10px]"
+        />
+      </figure>
+
       <div className="relative -top-5 w-full flex justify-center">
-        <div className="h-10 w-36 bg-purple-300 rounded-4xl outline outline-purple-400">
+        <div
+          className={`h-10 w-36 bg-white rounded-4xl outline ${
+            quantityBtns ? "outline-main-red" : "outline-blush-400"
+          }`}
+        >
           {quantityBtns ? (
-            <div className="w-full h-full bg-amber-500 rounded-4xl flex justify-between items-center">
+            <div className="w-full h-full bg-main-red rounded-4xl flex justify-between items-center">
               <button
-                className="mx-3 h-fit w-fit py-0.5 px-2 outline outline-black rounded-full"
+                className="mx-4.5 h-fit w-fit outline-2 outline-white rounded-full"
                 onClick={() => handleDecrease(product)}
               >
-                -
+                <img
+                  src="/images/icon-decrement-quantity.svg"
+                  alt=""
+                  className="outline-black outline h-4.5 rounded-full w-4.5 p-1"
+                />
               </button>
-              <p>{currentAmount}</p>
+              <p className="text-white">{currentAmount}</p>
               <button
-                className="mx-3 h-fit w-fit py-0.5 px-2 outline outline-black rounded-full"
+                className="mx-4.5 h-fit w-fit outline-2 outline-white rounded-full"
                 onClick={() => handleIncrease(product)}
               >
-                +
+                <img
+                  src="/images/icon-increment-quantity.svg"
+                  alt=""
+                  className="outline-black outline h-4.5 rounded-full w-4.5 p-1"
+                />
               </button>
             </div>
           ) : (
             <button
-              className="w-full h-full rounded-4xl"
+              className="w-full h-full rounded-4xl text-sm font-semibold flex justify-center items-center"
               onClick={() => handleAddProduct(product)}
+              aria-label={`Add ${name} to cart`}
             >
-              Add to Cart
+              <img
+                src="/images/icon-add-to-cart.svg"
+                className="mr-1"
+                alt=""
+                aria-hidden="true"
+              />
+              <p>Add to Cart</p>
             </button>
           )}
         </div>
       </div>
-      <div className="">
-        <p>{category}</p>
-        <legend>{name}</legend>
-        <p>{price}</p>
+      <div>
+        <p className="text-sm text-blush-500">{category}</p>
+        <h2 className="font-semibold">{name}</h2>
+        <p className="font-semibold text-main-red">${price.toFixed(2)}</p>
       </div>
     </article>
   );
