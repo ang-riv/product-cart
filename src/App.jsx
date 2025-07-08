@@ -3,14 +3,13 @@ import data from "./data.json";
 import Modal from "./components/Modal";
 import ProductCard from "./components/ProductCard";
 import { CartContext } from "./components/CartContext";
-import { filter } from "motion/react-m";
+import { div, filter } from "motion/react-m";
 function App() {
   const { cart, setCart } = useContext(CartContext);
   // * app info
   const appTitle = "Desserts";
   const products = [data[0], data[1], data[2]];
-  // holds all the products
-  //const [cart, setCart] = useState([]);
+
   const [filteredCart, setFilteredCart] = useState([]);
 
   const [showM, setShowM] = useState(true);
@@ -86,7 +85,7 @@ function App() {
       <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%]">
         {!showM && <Modal />}
         {/* products */}
-        <section className="w-full justify-center flex flex-col items-center ">
+        <section className="w-full justify-center flex flex-col items-center md:justify-start">
           <h1 className="pb-5 w-full font-bold">{appTitle}</h1>
           <div className=" w-full flex justify-center sm:justify-start">
             <div className={`w-fit h-fit gap-4 ${gridStyles}`}>
@@ -97,7 +96,7 @@ function App() {
           </div>
         </section>
         {/*  cart */}
-        <section className="md:ml-3 w-full flex justify-center md:max-w-xs">
+        <section className="md:ml-3 w-full flex justify-center md:max-w-xs mt-8 md:mt-0">
           <div className="h-fit min-h-60 w-full md:max-w-xs bg-white rounded-lg outline outline-amber-600 py-6 px-5">
             <h3 className="text-2xl font-bold text-main-red">
               Your Cart({numOfItems("cartItems")})
@@ -127,27 +126,42 @@ function App() {
                 </button>
               </div>
             ))}
-            <div className="flex justify-between items-center py-5.5">
-              <p className="text-blush-900">Order Total </p>
-              <p className="font-bold text-3xl text-blush-900">
-                ${numOfItems("orderTotal")}
-              </p>
-            </div>
-            <div className="bg-blush-100 w-full py-4 flex justify-center items-center rounded-lg">
-              <img
-                className="mr-1"
-                src="/images/icon-carbon-neutral.svg"
-                alt=""
-                aria-hidden="true"
-              />
-              <p className="text-sm text-center text-blush-900">
-                This is a <span className="font-bold">carbon-neutral</span>{" "}
-                delivery
-              </p>
-            </div>
-            <button className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5">
-              Confirm Order
-            </button>
+            {/* cart */}
+            {filteredCart.length > 0 ? (
+              <div>
+                <div className="flex justify-between items-center py-5.5">
+                  <p className="text-blush-900">Order Total </p>
+                  <p className="font-bold text-3xl text-blush-900">
+                    ${numOfItems("orderTotal")}
+                  </p>
+                </div>
+                <div className="bg-blush-100 w-full py-4 flex justify-center items-center rounded-lg">
+                  <img
+                    className="mr-1"
+                    src="/images/icon-carbon-neutral.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <p className="text-sm text-center text-blush-900">
+                    This is a <span className="font-bold">carbon-neutral</span>{" "}
+                    delivery
+                  </p>
+                </div>
+                <button className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5">
+                  Confirm Order
+                </button>
+              </div>
+            ) : (
+              <div className="w-full flex flex-col items-center my-5">
+                <img
+                  src="/images/illustration-empty-cart.svg"
+                  className="max-h-56 mb-5"
+                />
+                <p className="text-sm text-blush-500 font-semibold">
+                  Your added items will appear here
+                </p>
+              </div>
+            )}
           </div>
         </section>
       </main>
