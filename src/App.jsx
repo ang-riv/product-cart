@@ -98,32 +98,39 @@ function App() {
         {/*  cart */}
         <section className="md:ml-3 w-full flex justify-center md:max-w-xs mt-8 md:mt-0">
           <div className="h-fit min-h-60 w-full md:max-w-xs bg-white rounded-lg outline outline-amber-600 py-6 px-5">
-            <h3 className="text-2xl font-bold text-main-red">
+            <h3 className="text-2xl font-bold text-main-red mb-3">
               Your Cart({numOfItems("cartItems")})
             </h3>
+            {/* products in cart */}
             {filteredCart.map((product, index) => (
-              <div key={index}>
-                <p>{product.name}</p>
-                <p>{product.amount}</p>
-                <p>{(product.amount * product.price).toFixed(2)}</p>
-                <button
-                  className="p-1 bg-blue-200"
-                  onClick={() => handleIncrease(product)}
-                >
-                  +
-                </button>
-                <button
-                  className="p-1 bg-green-200"
-                  onClick={() => handleDecrease(product)}
-                >
-                  -
-                </button>
-                <button
-                  className="p-1 bg-purple-200"
-                  onClick={() => handleRemove(product)}
-                >
-                  *
-                </button>
+              <div
+                key={index}
+                className="w-full h-20 flex justify-between border-b-1 border-gray-200"
+              >
+                <div className="flex flex-col justify-center">
+                  <p className="text-sm font-semibold text-blush-900 mb-2">
+                    {product.name}
+                  </p>
+                  <div className="flex w-full">
+                    <p className="mr-5 font-semibold text-main-red">
+                      {product.amount}x
+                    </p>
+                    <p className="mr-2 text-blush-500">
+                      @ {product.price.toFixed(2)}
+                    </p>
+                    <p className=" font-semibold text-blush-500">
+                      ${(product.amount * product.price).toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex justify-center items-center h-full outline outline-amber-500">
+                  <button
+                    className="p-1 bg-purple-200 h-10 w-10"
+                    onClick={() => handleRemove(product)}
+                  >
+                    *
+                  </button>
+                </div>
               </div>
             ))}
             {/* cart */}
