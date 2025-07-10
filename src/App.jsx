@@ -100,7 +100,13 @@ function App() {
         ref={containerRef}
         className="min-h-screen px-5 flex flex-col justify-between items-center bg-blush-50 relative"
       >
-        {!showM && <Modal />}
+        {showM && (
+          <Modal
+            cart={filteredCart}
+            numOfItems={numOfItems("orderTotal")}
+            onClick={() => setShowM(false)}
+          />
+        )}
         <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%] relative">
           {/* products */}
           <section className="w-full justify-center flex flex-col items-center md:justify-start">
@@ -172,7 +178,10 @@ function App() {
                       <span className="font-bold">carbon-neutral</span> delivery
                     </p>
                   </div>
-                  <button className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5">
+                  <button
+                    className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5"
+                    onClick={() => setShowM(true)}
+                  >
                     Confirm Order
                   </button>
                 </div>
