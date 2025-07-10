@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import data from "./data.json";
 import Modal from "./components/Modal";
 import ProductCard from "./components/ProductCard";
 import { CartContext } from "./components/CartContext";
-import { div, filter } from "motion/react-m";
 function App() {
   const { cart, setCart } = useContext(CartContext);
   // * app info
@@ -12,7 +11,7 @@ function App() {
 
   const [filteredCart, setFilteredCart] = useState([]);
 
-  const [showM, setShowM] = useState(true);
+  const [showM, setShowM] = useState(false);
   useEffect(() => {
     // find only the products that are not zero
     const amounts = cart.filter((product) => product.amount != 0);
@@ -80,113 +79,133 @@ function App() {
       }
     }
   };
+  const containerRef = useRef();
+  const [modalHeight, setModalHeight] = useState(0);
+  const findContainerHeight = () => {
+    if (containerRef.current) {
+      const height = containerRef.current.getBoundingClientRect().height;
+      if (height > 0) setModalHeight(height);
+    }
+  };
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const height = containerRef.current.getBoundingClientRect().height;
+      if (height > 0) setModalHeight(height);
+    }
+  }, [containerRef]);
   return (
-    <div className="min-h-screen px-5 flex flex-col justify-between items-center bg-blush-50">
-      <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%]">
+    <>
+      <div
+        ref={containerRef}
+        className="min-h-screen px-5 flex flex-col justify-between items-center bg-blush-50 relative"
+      >
         {!showM && <Modal />}
-        {/* products */}
-        <section className="w-full justify-center flex flex-col items-center md:justify-start">
-          <h1 className="pb-5 w-full font-bold">{appTitle}</h1>
-          <div className=" w-full flex justify-center sm:justify-start">
-            <div className={`w-fit h-fit gap-4 ${gridStyles}`}>
-              {products.map((product) => (
-                <ProductCard product={product} filteredCart={filteredCart} />
-              ))}
+        <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%] relative">
+          {/* products */}
+          <section className="w-full justify-center flex flex-col items-center md:justify-start">
+            <h1 className="pb-5 w-full font-bold">{appTitle}</h1>
+            <div className=" w-full flex justify-center sm:justify-start">
+              <div className={`w-fit h-fit gap-4 ${gridStyles}`}>
+                {products.map((product) => (
+                  <ProductCard product={product} filteredCart={filteredCart} />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-        {/*  cart */}
-        <section className="md:ml-3 w-full flex justify-center md:max-w-xs mt-8 md:mt-0">
-          <div className="h-fit min-h-60 w-full md:max-w-xs bg-white rounded-lg outline outline-amber-600 py-6 px-5">
-            <h3 className="text-2xl font-bold text-main-red mb-3">
-              Your Cart({numOfItems("cartItems")})
-            </h3>
-            {/* products in cart */}
-            {filteredCart.map((product, index) => (
-              <div
-                key={index}
-                className="w-full h-20 flex justify-between border-b-1 border-gray-200"
-              >
-                <div className="flex flex-col justify-center">
-                  <p className="text-sm font-semibold text-blush-900 mb-2">
-                    {product.name}
-                  </p>
-                  <div className="flex w-full">
-                    <p className="mr-5 font-semibold text-main-red">
-                      {product.amount}x
+          </section>
+          {/*  cart */}
+          <section className="md:ml-3 w-full flex justify-center md:max-w-xs mt-8 md:mt-0">
+            <div className="h-fit min-h-60 w-full md:max-w-xs bg-white rounded-lg outline outline-amber-600 py-6 px-5">
+              <h3 className="text-2xl font-bold text-main-red mb-3">
+                Your Cart({numOfItems("cartItems")})
+              </h3>
+              {/* products in cart */}
+              {filteredCart.map((product, index) => (
+                <div
+                  key={index}
+                  className="w-full h-20 flex justify-between border-b-1 border-gray-200"
+                >
+                  <div className="flex flex-col justify-center">
+                    <p className="text-sm font-semibold text-blush-900 mb-2">
+                      {product.name}
                     </p>
-                    <p className="mr-2 text-blush-500">
-                      @ {product.price.toFixed(2)}
-                    </p>
-                    <p className=" font-semibold text-blush-500">
-                      ${(product.amount * product.price).toFixed(2)}
-                    </p>
+                    <div className="flex w-full">
+                      <p className="mr-5 font-semibold text-main-red">
+                        {product.amount}x
+                      </p>
+                      <p className="mr-2 text-blush-500">
+                        @ {product.price.toFixed(2)}
+                      </p>
+                      <p className=" font-semibold text-blush-500">
+                        ${(product.amount * product.price).toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center h-full outline outline-amber-500">
+                    <button
+                      className="p-1 bg-purple-200 h-10 w-10"
+                      onClick={() => handleRemove(product)}
+                    >
+                      *
+                    </button>
                   </div>
                 </div>
-                <div className="flex justify-center items-center h-full outline outline-amber-500">
-                  <button
-                    className="p-1 bg-purple-200 h-10 w-10"
-                    onClick={() => handleRemove(product)}
-                  >
-                    *
+              ))}
+              {/* cart */}
+              {filteredCart.length > 0 ? (
+                <div>
+                  <div className="flex justify-between items-center py-5.5">
+                    <p className="text-blush-900">Order Total </p>
+                    <p className="font-bold text-3xl text-blush-900">
+                      ${numOfItems("orderTotal")}
+                    </p>
+                  </div>
+                  <div className="bg-blush-100 w-full py-4 flex justify-center items-center rounded-lg">
+                    <img
+                      className="mr-1"
+                      src="/images/icon-carbon-neutral.svg"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <p className="text-sm text-center text-blush-900">
+                      This is a{" "}
+                      <span className="font-bold">carbon-neutral</span> delivery
+                    </p>
+                  </div>
+                  <button className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5">
+                    Confirm Order
                   </button>
                 </div>
-              </div>
-            ))}
-            {/* cart */}
-            {filteredCart.length > 0 ? (
-              <div>
-                <div className="flex justify-between items-center py-5.5">
-                  <p className="text-blush-900">Order Total </p>
-                  <p className="font-bold text-3xl text-blush-900">
-                    ${numOfItems("orderTotal")}
-                  </p>
-                </div>
-                <div className="bg-blush-100 w-full py-4 flex justify-center items-center rounded-lg">
+              ) : (
+                <div className="w-full flex flex-col items-center my-5">
                   <img
-                    className="mr-1"
-                    src="/images/icon-carbon-neutral.svg"
-                    alt=""
-                    aria-hidden="true"
+                    src="/images/illustration-empty-cart.svg"
+                    className="max-h-56 mb-5"
                   />
-                  <p className="text-sm text-center text-blush-900">
-                    This is a <span className="font-bold">carbon-neutral</span>{" "}
-                    delivery
+                  <p className="text-sm text-blush-500 font-semibold">
+                    Your added items will appear here
                   </p>
                 </div>
-                <button className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5">
-                  Confirm Order
-                </button>
-              </div>
-            ) : (
-              <div className="w-full flex flex-col items-center my-5">
-                <img
-                  src="/images/illustration-empty-cart.svg"
-                  className="max-h-56 mb-5"
-                />
-                <p className="text-sm text-blush-500 font-semibold">
-                  Your added items will appear here
-                </p>
-              </div>
-            )}
-          </div>
-        </section>
-      </main>
-      <footer className="attribution h-[5%] w-full flex items-end justify-center">
-        <p>
-          {" "}
-          Challenge by{" "}
-          <a href="https://www.frontendmentor.io?ref=challenge">
-            Frontend Mentor
-          </a>
-          . Coded by{" "}
-          <a href="https://www.frontendmentor.io/profile/ang-riv">
-            Angela Rivera
-          </a>
-          .
-        </p>
-      </footer>
-    </div>
+              )}
+            </div>
+          </section>
+        </main>
+        <footer className="attribution h-[5%] w-full flex items-end justify-center">
+          <p>
+            {" "}
+            Challenge by{" "}
+            <a href="https://www.frontendmentor.io?ref=challenge">
+              Frontend Mentor
+            </a>
+            . Coded by{" "}
+            <a href="https://www.frontendmentor.io/profile/ang-riv">
+              Angela Rivera
+            </a>
+            .
+          </p>
+        </footer>
+      </div>
+    </>
   );
 }
 
