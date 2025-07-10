@@ -9,11 +9,11 @@ const Modal = ({ cart, numOfItems, onClick }) => {
           Order <br /> Confirmed
         </h4>
         <p className="text-blush-500 mt-2">We hope you enjoy your food!</p>
-        <div className="w-full rounded-lg bg-amber-500 h-fit my-8 p-4">
+        <div className="w-full rounded-lg bg-blush-50 h-fit my-8 p-4">
           {cart.map((item) => {
             const itemImage = item.image;
             return (
-              <div className="py-3 border-b-2 border-gray-300">
+              <div className="py-3 border-b-2 border-gray-100">
                 <div className="flex h-14">
                   <img
                     src={itemImage.thumbnail}
@@ -35,7 +35,7 @@ const Modal = ({ cart, numOfItems, onClick }) => {
             );
           })}
           <div className="flex justify-between items-center mt-5">
-            <p>Order Total</p>
+            <p className="text-blush-900">Order Total</p>
             <p className="text-2xl font-bold">${numOfItems}</p>
           </div>
         </div>
