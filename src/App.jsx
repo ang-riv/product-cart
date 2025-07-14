@@ -136,7 +136,7 @@ function App() {
                       {product.name}
                     </p>
                     <div className="flex w-full">
-                      <p className="mr-5 font-semibold text-main-red">
+                      <p className="w-9 font-semibold text-main-red">
                         {product.amount}x
                       </p>
                       <p className="mr-2 text-blush-500">
