@@ -10,10 +10,10 @@ const Modal = ({ cart, numOfItems, onClick }) => {
         </h4>
         <p className="text-blush-500 mt-2">We hope you enjoy your food!</p>
         <div className="w-full rounded-lg bg-blush-50 h-fit my-8 p-4">
-          {cart.map((item) => {
+          {cart.map((item, index) => {
             const itemImage = item.image;
             return (
-              <div className="py-3 border-b-2 border-gray-100">
+              <div key={index} className="py-3 border-b-2 border-gray-100">
                 <div className="flex h-14">
                   <img
                     src={itemImage.thumbnail}

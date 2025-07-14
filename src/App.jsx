@@ -147,12 +147,12 @@ function App() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex justify-center items-center h-full outline outline-amber-500">
+                  <div className="flex justify-center items-center h-full ">
                     <button
-                      className="p-1 bg-purple-200 h-10 w-10"
+                      className="p-1 border border-blush-400 h-5 w-5 flex justify-center rounded-4xl hover:cursor-pointer"
                       onClick={() => handleRemove(product)}
                     >
-                      *
+                      <img src="/images/icon-remove-item.svg" alt="remove" />
                     </button>
                   </div>
                 </div>
