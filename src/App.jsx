@@ -94,6 +94,11 @@ function App() {
       if (height > 0) setModalHeight(height);
     }
   }, [containerRef]);
+  const handleReset = () => {
+    setShowM(false);
+    setCart([]);
+    setFilteredCart([]);
+  };
   return (
     <>
       <div
@@ -102,9 +107,9 @@ function App() {
       >
         {showM && (
           <Modal
-            cart={filteredCart}
+            currentCart={filteredCart}
             numOfItems={numOfItems("orderTotal")}
-            onClick={() => setShowM(false)}
+            onClick={handleReset}
           />
         )}
         <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%] relative">

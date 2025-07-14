@@ -16,7 +16,7 @@ const ProductCard = ({ product, filteredCart }) => {
       setQuantityBtns(true);
     }
 
-    if (currentAmount === 0) {
+    if (currentAmount === 0 || cart.length === 0) {
       setQuantityBtns(false);
     }
   }, [cart, filteredCart]);

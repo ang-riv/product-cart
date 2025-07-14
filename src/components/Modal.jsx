@@ -1,5 +1,5 @@
 // return mobile or tab/desktop based on size
-const Modal = ({ cart, numOfItems, onClick }) => {
+const Modal = ({ currentCart, numOfItems, onClick }) => {
   return (
     <>
       <div className="absolute z-10 top-0 bottom-0 left-0 right-0 bg-gray-950 opacity-30"></div>
@@ -10,7 +10,7 @@ const Modal = ({ cart, numOfItems, onClick }) => {
         </h4>
         <p className="text-blush-500 mt-2">We hope you enjoy your food!</p>
         <div className="w-full rounded-lg bg-blush-50 h-fit my-8 p-4">
-          {cart.map((item, index) => {
+          {currentCart.map((item, index) => {
             const itemImage = item.image;
             return (
               <div key={index} className="py-3 border-b-2 border-gray-100">
