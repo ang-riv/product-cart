@@ -1,12 +1,14 @@
 // return mobile or tab/desktop based on size
 const Modal = ({ currentCart, numOfItems, onClick }) => {
+  //
   return (
     <>
       <div className="absolute z-10 top-0 bottom-0 left-0 right-0 bg-gray-950 opacity-30"></div>
-      <div className="fixed w-full h-fit bg-white bottom-0 rounded-t-2xl z-20 px-5 pt-10 pb-6">
+      {/*  */}
+      <div className="fixed w-full h-fit bg-white bottom-0 md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 rounded-t-2xl z-20 px-5 pt-10 pb-6 md:max-w-lg md:rounded-b-2xl md:px-8 md:py-8">
         <img src="/images/icon-order-confirmed.svg" alt="checkmark icon" />
         <h4 className="text-blush-900 font-bold text-4xl mt-6">
-          Order <br /> Confirmed
+          Order Confirmed
         </h4>
         <p className="text-blush-500 mt-2">We hope you enjoy your food!</p>
         <div className="w-full rounded-lg bg-blush-50 h-fit my-8 p-4">
