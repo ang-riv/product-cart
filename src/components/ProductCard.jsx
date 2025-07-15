@@ -8,7 +8,6 @@ const ProductCard = ({ product, filteredCart }) => {
   const [currentAmount, setCurrentAmount] = useState(null);
 
   useEffect(() => {
-    // find the item
     const currentProduct = cart.filter((item) => item.name === name);
 
     if (currentProduct.length != 0 && currentProduct[0].amount != undefined) {
@@ -50,6 +49,45 @@ const ProductCard = ({ product, filteredCart }) => {
       )
     );
   };
+
+  const innerButtons = (clickEvent, btn) => {
+    return (
+      <div
+        className={`mx-4.5 h-fit w-fit outline-2 outline-white rounded-full ${activeQuantityDiv} flex justify-center items-center p-1`}
+        onClick={clickEvent}
+      >
+        <button
+          className={`w-2.5 p-1 h-2.5 bg-white outline-2 ${activeInnerBtn}`}
+          style={
+            btn === "increment"
+              ? {
+                  WebkitMask:
+                    "url('/images/icon-increment-quantity.svg') no-repeat center",
+                  mask: "url('/images/icon-increment-quantity.svg') no-repeat center",
+                  WebkitMaskSize: "contain",
+                  maskSize: "contain",
+                }
+              : {
+                  WebkitMask:
+                    "url('/images/icon-decrement-quantity.svg') no-repeat center",
+                  mask: "url('/images/icon-decrement-quantity.svg') no-repeat center",
+                  WebkitMaskSize: "contain",
+                  maskSize: "contain",
+                }
+          }
+        />
+      </div>
+    );
+  };
+  // * active state styles
+  const activeCart =
+    "hover:cursor-pointer hover:outline hover:outline-main-red hover:text-main-red";
+
+  const activeQuantityDiv =
+    "hover:cursor-pointer hover:outline hover:outline-main-red hover:bg-white";
+
+  const activeInnerBtn = "hover:cursor-pointer hover:bg-main-red";
+
   return (
     <article key={name} className="min-h-72 max-h-96 max-w-[320px]">
       <figure
@@ -63,7 +101,7 @@ const ProductCard = ({ product, filteredCart }) => {
           className="object-cover w-full min-h-56 rounded-lg"
         />
       </figure>
-
+      {/* button */}
       <div className="relative -top-5 w-full flex justify-center">
         <div
           className={`h-10 w-36 bg-white rounded-4xl outline ${
@@ -72,31 +110,13 @@ const ProductCard = ({ product, filteredCart }) => {
         >
           {quantityBtns ? (
             <div className="w-full h-full bg-main-red rounded-4xl flex justify-between items-center">
-              <button
-                className="mx-4.5 h-fit w-fit outline-2 outline-white rounded-full"
-                onClick={() => handleDecrease(product)}
-              >
-                <img
-                  src="/images/icon-decrement-quantity.svg"
-                  alt=""
-                  className="outline-black outline h-4.5 rounded-full w-4.5 p-1"
-                />
-              </button>
+              {innerButtons(() => handleDecrease(product), "decrement")}
               <p className="text-white">{currentAmount}</p>
-              <button
-                className="mx-4.5 h-fit w-fit outline-2 outline-white rounded-full"
-                onClick={() => handleIncrease(product)}
-              >
-                <img
-                  src="/images/icon-increment-quantity.svg"
-                  alt=""
-                  className="outline-black outline h-4.5 rounded-full w-4.5 p-1"
-                />
-              </button>
+              {innerButtons(() => handleIncrease(product), "increment")}
             </div>
           ) : (
             <button
-              className="w-full h-full rounded-4xl text-sm font-semibold flex justify-center items-center"
+              className={`w-full h-full rounded-4xl text-sm font-semibold flex justify-center items-center ${activeCart}`}
               onClick={() => handleAddProduct(product)}
               aria-label={`Add ${name} to cart`}
             >
