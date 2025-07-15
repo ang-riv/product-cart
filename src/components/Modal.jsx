@@ -42,7 +42,7 @@ const Modal = ({ currentCart, numOfItems, onClick }) => {
           </div>
         </div>
         <button
-          className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4"
+          className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 hover:cursor-pointer hover:bg-red-900"
           onClick={onClick}
         >
           Start New Order

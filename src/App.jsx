@@ -110,12 +110,22 @@ function App() {
                     </div>
                   </div>
                   <div className="flex justify-center items-center h-full ">
-                    <button
-                      className="p-1 border border-blush-400 h-5 w-5 flex justify-center rounded-4xl hover:cursor-pointer"
+                    <div
+                      className="p-1 border border-blush-400 h-5 w-5 flex justify-center rounded-4xl hover:cursor-pointer hover:border-black"
                       onClick={() => handleRemove(product)}
                     >
-                      <img src="/images/icon-remove-item.svg" alt="remove" />
-                    </button>
+                      {/* <img src="/images/icon-remove-item.svg" alt="remove" /> */}
+                      <button
+                        className={`w-full p-1 h-full bg-blush-400 outline-2 hover:cursor-pointer hover:bg-black`}
+                        style={{
+                          WebkitMask:
+                            "url('/images/icon-remove-item.svg') no-repeat center",
+                          mask: "url('/images/icon-remove-item.svg') no-repeat center",
+                          WebkitMaskSize: "contain",
+                          maskSize: "contain",
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -141,7 +151,7 @@ function App() {
                     </p>
                   </div>
                   <button
-                    className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5"
+                    className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5 hover:bg-red-900 hover:cursor-pointer"
                     onClick={() => setShowM(true)}
                   >
                     Confirm Order
