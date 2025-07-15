@@ -5,13 +5,11 @@ import ProductCard from "./components/ProductCard";
 import { CartContext } from "./components/CartContext";
 function App() {
   const { cart, setCart } = useContext(CartContext);
-  // * app info
   const appTitle = "Desserts";
-  const products = [data[0], data[1], data[2]];
-
+  const products = data;
   const [filteredCart, setFilteredCart] = useState([]);
-
   const [showM, setShowM] = useState(false);
+
   useEffect(() => {
     // find only the products that are not zero
     const amounts = cart.filter((product) => product.amount != 0);
@@ -26,34 +24,10 @@ function App() {
     }
   }, [cart]);
 
-  // add to cart for the first time
-  const handleAddProduct = (product) => {
-    setCart([
-      ...cart,
-      {
-        name: product.name,
-        image: product.image,
-        category: product.category,
-        price: product.price,
-        amount: 1,
-      },
-    ]);
-  };
+  // product grid
+  const gridStyles = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ";
 
-  const handleIncrease = (product) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.name === product.name ? { ...item, amount: item.amount + 1 } : item
-      )
-    );
-  };
-  const handleDecrease = (product) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.name === product.name ? { ...item, amount: item.amount - 1 } : item
-      )
-    );
-  };
+  // remove from cart
   const handleRemove = (product) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -61,7 +35,6 @@ function App() {
       )
     );
   };
-  const gridStyles = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ";
 
   // adding up the items
   const numOfItems = (category) => {
@@ -79,32 +52,16 @@ function App() {
       }
     }
   };
-  const containerRef = useRef();
-  const [modalHeight, setModalHeight] = useState(0);
-  const findContainerHeight = () => {
-    if (containerRef.current) {
-      const height = containerRef.current.getBoundingClientRect().height;
-      if (height > 0) setModalHeight(height);
-    }
-  };
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const height = containerRef.current.getBoundingClientRect().height;
-      if (height > 0) setModalHeight(height);
-    }
-  }, [containerRef]);
   const handleReset = () => {
     setShowM(false);
     setCart([]);
     setFilteredCart([]);
   };
+
   return (
     <>
-      <div
-        ref={containerRef}
-        className="min-h-screen px-5 flex flex-col justify-between items-center bg-blush-50 relative"
-      >
+      <div className="min-h-screen px-5 flex flex-col justify-between items-center bg-blush-50 relative">
         {showM && (
           <Modal
             currentCart={filteredCart}
@@ -126,7 +83,7 @@ function App() {
           </section>
           {/*  cart */}
           <section className="md:ml-3 w-full flex justify-center md:max-w-xs mt-8 md:mt-0">
-            <div className="h-fit min-h-60 w-full md:max-w-xs bg-white rounded-lg outline outline-amber-600 py-6 px-5">
+            <div className="h-fit min-h-60 w-full md:max-w-xs bg-white rounded-lg  py-6 px-5">
               <h3 className="text-2xl font-bold text-main-red mb-3">
                 Your Cart({numOfItems("cartItems")})
               </h3>
