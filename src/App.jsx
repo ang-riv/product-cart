@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import data from "./data.json";
+import { motion, AnimatePresence } from "motion/react";
 import Modal from "./components/Modal";
 import ProductCard from "./components/ProductCard";
 import { CartContext } from "./components/CartContext";
@@ -88,47 +89,51 @@ function App() {
                 Your Cart({numOfItems("cartItems")})
               </h3>
               {/* products in cart */}
-              {filteredCart.map((product, index) => (
-                <div
-                  key={index}
-                  className="w-full h-20 flex justify-between border-b-1 border-gray-200"
-                >
-                  <div className="flex flex-col justify-center">
-                    <p className="text-sm font-semibold text-blush-900 mb-2">
-                      {product.name}
-                    </p>
-                    <div className="flex w-full">
-                      <p className="w-9 font-semibold text-main-red">
-                        {product.amount}x
+              <AnimatePresence mode="sync">
+                {filteredCart.map((product, index) => (
+                  <motion.div
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    key={index}
+                    className="w-full h-20 flex justify-between border-b-1 border-gray-200"
+                  >
+                    <div className="flex flex-col justify-center">
+                      <p className="text-sm font-semibold text-blush-900 mb-2">
+                        {product.name}
                       </p>
-                      <p className="mr-2 text-blush-500">
-                        @ {product.price.toFixed(2)}
-                      </p>
-                      <p className=" font-semibold text-blush-500">
-                        ${(product.amount * product.price).toFixed(2)}
-                      </p>
+                      <div className="flex w-full">
+                        <p className="w-9 font-semibold text-main-red">
+                          {product.amount}x
+                        </p>
+                        <p className="mr-2 text-blush-500">
+                          @ {product.price.toFixed(2)}
+                        </p>
+                        <p className=" font-semibold text-blush-500">
+                          ${(product.amount * product.price).toFixed(2)}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex justify-center items-center h-full ">
-                    <div
-                      className="p-1 border border-blush-400 h-5 w-5 flex justify-center rounded-4xl hover:cursor-pointer hover:border-black"
-                      onClick={() => handleRemove(product)}
-                    >
-                      {/* <img src="/images/icon-remove-item.svg" alt="remove" /> */}
-                      <button
-                        className={`w-full p-1 h-full bg-blush-400 outline-2 hover:cursor-pointer hover:bg-black`}
-                        style={{
-                          WebkitMask:
-                            "url('/images/icon-remove-item.svg') no-repeat center",
-                          mask: "url('/images/icon-remove-item.svg') no-repeat center",
-                          WebkitMaskSize: "contain",
-                          maskSize: "contain",
-                        }}
-                      />
+                    <div className="flex justify-center items-center h-full ">
+                      <div
+                        className="p-1 border border-blush-400 h-5 w-5 flex justify-center rounded-4xl hover:cursor-pointer hover:border-black"
+                        onClick={() => handleRemove(product)}
+                      >
+                        {/* <img src="/images/icon-remove-item.svg" alt="remove" /> */}
+                        <button
+                          className={`w-full p-1 h-full bg-blush-400 outline-2 hover:cursor-pointer hover:bg-black`}
+                          style={{
+                            WebkitMask:
+                              "url('/images/icon-remove-item.svg') no-repeat center",
+                            mask: "url('/images/icon-remove-item.svg') no-repeat center",
+                            WebkitMaskSize: "contain",
+                            maskSize: "contain",
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
               {/* cart */}
               {filteredCart.length > 0 ? (
                 <div>
