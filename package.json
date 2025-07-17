@@ -4,13 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "homepage": "https://ang-riv.github.io/product-cart/",
     "dev": "vite",
     "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
+    "gh-pages": "^6.3.0",
     "motion": "^12.18.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
