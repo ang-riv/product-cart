@@ -32,8 +32,8 @@ function App() {
   const handleRemove = (product) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.name === product.name ? { ...item, amount: 0 } : item,
-      ),
+        item.name === product.name ? { ...item, amount: 0 } : item
+      )
     );
   };
 
@@ -46,7 +46,7 @@ function App() {
         return sum;
       } else {
         const amountAndPrice = filteredCart.map(
-          (item) => item.amount * item.price,
+          (item) => item.amount * item.price
         );
         const sum = amountAndPrice.reduce((acc, value) => acc + value, 0);
         return sum.toFixed(2);
@@ -84,7 +84,7 @@ function App() {
           </section>
           {/*  cart */}
           <section className="md:ml-3 w-full flex justify-center md:max-w-xs mt-8 md:mt-0">
-            <div className="h-fit min-h-60 w-full md:max-w-xs bg-white rounded-lg  py-6 px-5">
+            <div className="h-fit min-h-60 w-full md:max-w-xs bg-white rounded-lg  py-6 px-5 drop-shadow-[6px_7px_4px_rgba(111,80,77,0.25)] outline-2 outline-main-red">
               <h3 className="text-2xl font-bold text-main-red mb-3">
                 Your Cart({numOfItems("cartItems")})
               </h3>
