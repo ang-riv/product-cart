@@ -15,7 +15,10 @@ const Modal = ({ currentCart, numOfItems, onClick }) => {
           exit={{ opacity: 0 }}
           className="fixed w-full h-fit bg-white bottom-0 md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 rounded-t-2xl z-20 px-5 pt-10 pb-6 md:max-w-lg md:rounded-b-2xl md:px-8 md:py-8"
         >
-          <img src="/images/icon-order-confirmed.svg" alt="checkmark icon" />
+          <img
+            src={`${import.meta.env.BASE_URL}/images/icon-order-confirmed.svg`}
+            alt="checkmark icon"
+          />
           <h4 className="text-blush-900 font-bold text-4xl mt-6">
             Order Confirmed
           </h4>

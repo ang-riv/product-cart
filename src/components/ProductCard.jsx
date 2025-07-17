@@ -3,7 +3,7 @@ import { CartContext } from "./CartContext";
 const ProductCard = ({ product, filteredCart }) => {
   const { cart, setCart } = useContext(CartContext);
   const { name, image, category, price } = product;
-  const productImage = image.mobile;
+  const productImage = `${import.meta.env.BASE_URL}${image.mobile}`;
   const [quantityBtns, setQuantityBtns] = useState(false);
   const [currentAmount, setCurrentAmount] = useState(null);
 

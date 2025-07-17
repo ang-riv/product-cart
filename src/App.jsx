@@ -118,13 +118,15 @@ function App() {
                         className="p-1 border border-blush-400 h-5 w-5 flex justify-center rounded-4xl hover:cursor-pointer hover:border-black"
                         onClick={() => handleRemove(product)}
                       >
-                        {/* <img src="/images/icon-remove-item.svg" alt="remove" /> */}
                         <button
                           className={`w-full p-1 h-full bg-blush-400 outline-2 hover:cursor-pointer hover:bg-black`}
                           style={{
-                            WebkitMask:
-                              "url('/images/icon-remove-item.svg') no-repeat center",
-                            mask: "url('/images/icon-remove-item.svg') no-repeat center",
+                            WebkitMask: `url('${
+                              import.meta.env.BASE_URL
+                            }images/icon-remove-item.svg') no-repeat center`,
+                            mask: `url('${
+                              import.meta.env.BASE_URL
+                            }images/icon-remove-item.svg') no-repeat center`,
                             WebkitMaskSize: "contain",
                             maskSize: "contain",
                           }}
@@ -146,7 +148,9 @@ function App() {
                   <div className="bg-blush-100 w-full py-4 flex justify-center items-center rounded-lg">
                     <img
                       className="mr-1"
-                      src="/images/icon-carbon-neutral.svg"
+                      src={`${
+                        import.meta.env.BASE_URL
+                      }/images/icon-carbon-neutral.svg`}
                       alt=""
                       aria-hidden="true"
                     />
@@ -165,7 +169,9 @@ function App() {
               ) : (
                 <div className="w-full flex flex-col items-center my-5">
                   <img
-                    src="/images/illustration-empty-cart.svg"
+                    src={`${
+                      import.meta.env.BASE_URL
+                    }/images/illustration-empty-cart.svg`}
                     className="max-h-56 mb-5"
                   />
                   <p className="text-sm text-blush-500 font-semibold">
