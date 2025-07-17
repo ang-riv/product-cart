@@ -32,8 +32,8 @@ function App() {
   const handleRemove = (product) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.name === product.name ? { ...item, amount: 0 } : item
-      )
+        item.name === product.name ? { ...item, amount: 0 } : item,
+      ),
     );
   };
 
@@ -46,7 +46,7 @@ function App() {
         return sum;
       } else {
         const amountAndPrice = filteredCart.map(
-          (item) => item.amount * item.price
+          (item) => item.amount * item.price,
         );
         const sum = amountAndPrice.reduce((acc, value) => acc + value, 0);
         return sum.toFixed(2);
