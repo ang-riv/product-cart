@@ -126,7 +126,7 @@ const ProductCard = ({ product, filteredCart }) => {
               aria-label={`Add ${name} to cart`}
             >
               <img
-                src="/images/icon-add-to-cart.svg"
+                src={`${import.meta.env.BASE_URL}/images/icon-add-to-cart.svg`}
                 className="mr-1"
                 alt=""
                 aria-hidden="true"

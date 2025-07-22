@@ -30,7 +30,7 @@ const Modal = ({ currentCart, numOfItems, onClick }) => {
                 <div key={index} className="py-3 border-b-2 border-gray-100">
                   <div className="flex h-14">
                     <img
-                      src={itemImage.thumbnail}
+                      src={`${import.meta.env.BASE_URL}${itemImage.thumbnail}`}
                       alt="item thumbnail"
                       className="h-12 w-12 rounded-lg mr-4"
                     />

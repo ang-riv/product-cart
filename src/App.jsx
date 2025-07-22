@@ -10,6 +10,7 @@ function App() {
   const products = data;
   const [filteredCart, setFilteredCart] = useState([]);
   const [showM, setShowM] = useState(false);
+  const [hoverRemove, setHoverRemove] = useState(null);
 
   useEffect(() => {
     // find only the products that are not zero
@@ -113,25 +114,27 @@ function App() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex justify-center items-center h-full ">
-                      <div
-                        className="p-1 border border-blush-400 h-5 w-5 flex justify-center rounded-4xl hover:cursor-pointer hover:border-black"
+                    <div className="flex justify-center items-center h-full">
+                      <img
+                        src={
+                          hoverRemove === index
+                            ? `${
+                                import.meta.env.BASE_URL
+                              }/images/hover-remove.svg`
+                            : `${
+                                import.meta.env.BASE_URL
+                              }/images/icon-remove-item.svg`
+                        }
+                        className={`size-5.5 hover:cursor-pointer border rounded-4xl p-0.5 ${
+                          hoverRemove === index
+                            ? "border-black"
+                            : "border-blush-400"
+                        }`}
                         onClick={() => handleRemove(product)}
-                      >
-                        <button
-                          className={`w-full p-1 h-full bg-blush-400 outline-2 hover:cursor-pointer hover:bg-black`}
-                          style={{
-                            WebkitMask: `url('${
-                              import.meta.env.BASE_URL
-                            }images/icon-remove-item.svg') no-repeat center`,
-                            mask: `url('${
-                              import.meta.env.BASE_URL
-                            }images/icon-remove-item.svg') no-repeat center`,
-                            WebkitMaskSize: "contain",
-                            maskSize: "contain",
-                          }}
-                        />
-                      </div>
+                        alt=""
+                        onMouseEnter={() => setHoverRemove(index)}
+                        onMouseLeave={() => setHoverRemove(null)}
+                      />
                     </div>
                   </motion.div>
                 ))}
@@ -182,14 +185,6 @@ function App() {
             </div>
           </section>
         </main>
-        <section>
-          <h4>testing</h4>
-          <img
-            src={`${import.meta.env.BASE_URL}/images/hover-increment.svg`}
-            className="size-20 rounded-full outline-3 outline-red-300"
-            alt=""
-          />
-        </section>
         <footer className="attribution h-[5%] w-full flex items-end justify-center">
           <p>
             {" "}
