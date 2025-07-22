@@ -3,7 +3,7 @@ import { CartContext } from "./CartContext";
 const ProductCard = ({ product, filteredCart }) => {
   const { cart, setCart } = useContext(CartContext);
   const { name, image, category, price } = product;
-  const productImage = `${import.meta.env.BASE_URL}${image.mobile}`;
+  const productImage = `${import.meta.env.BASE_URL}${image.desktop}`;
   const [quantityBtns, setQuantityBtns] = useState(false);
   const [currentAmount, setCurrentAmount] = useState(null);
 
@@ -56,24 +56,12 @@ const ProductCard = ({ product, filteredCart }) => {
         className={`mx-4.5 h-fit w-fit outline-2 outline-white rounded-full ${activeQuantityDiv} flex justify-center items-center p-1`}
         onClick={clickEvent}
       >
-        <button
-          className={`w-2.5 p-1 h-2.5 bg-white outline-2 ${activeInnerBtn}`}
-          style={
+        <img
+          className={`w-3 h-3 `}
+          src={
             btn === "increment"
-              ? {
-                  WebkitMask:
-                    "url('/images/icon-increment-quantity.svg') no-repeat center",
-                  mask: "url('/images/icon-increment-quantity.svg') no-repeat center",
-                  WebkitMaskSize: "contain",
-                  maskSize: "contain",
-                }
-              : {
-                  WebkitMask:
-                    "url('/images/icon-decrement-quantity.svg') no-repeat center",
-                  mask: "url('/images/icon-decrement-quantity.svg') no-repeat center",
-                  WebkitMaskSize: "contain",
-                  maskSize: "contain",
-                }
+              ? `${import.meta.env.BASE_URL}/images/icon-increment-quantity.svg`
+              : `${import.meta.env.BASE_URL}/images/icon-decrement-quantity.svg`
           }
         />
       </div>
