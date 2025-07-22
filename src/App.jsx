@@ -77,8 +77,12 @@ function App() {
             <h1 className="pb-5 w-full font-bold">{appTitle}</h1>
             <div className=" w-full flex justify-center sm:justify-start">
               <div className={`w-fit h-fit gap-4 ${gridStyles}`}>
-                {products.map((product) => (
-                  <ProductCard product={product} filteredCart={filteredCart} />
+                {products.map((product, index) => (
+                  <ProductCard
+                    key={index}
+                    product={product}
+                    filteredCart={filteredCart}
+                  />
                 ))}
               </div>
             </div>
