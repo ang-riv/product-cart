@@ -182,6 +182,14 @@ function App() {
             </div>
           </section>
         </main>
+        <section>
+          <h4>testing</h4>
+          <img
+            src={`${import.meta.env.BASE_URL}/images/hover-increment.svg`}
+            className="size-20 rounded-full outline-3 outline-red-300"
+            alt=""
+          />
+        </section>
         <footer className="attribution h-[5%] w-full flex items-end justify-center">
           <p>
             {" "}

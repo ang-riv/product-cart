@@ -7,6 +7,10 @@ const ProductCard = ({ product, filteredCart }) => {
   const [quantityBtns, setQuantityBtns] = useState(false);
   const [currentAmount, setCurrentAmount] = useState(null);
 
+  // hover quantity buttons
+  const [incrementHover, isIncrementHovered] = useState(false);
+  const [decrementHover, isDecrementHovered] = useState(false);
+
   useEffect(() => {
     const currentProduct = cart.filter((item) => item.name === name);
 
@@ -50,21 +54,36 @@ const ProductCard = ({ product, filteredCart }) => {
     );
   };
 
+  const innerImage = (icon) => {
+    let iconSymbol = icon === "increment" ? "increment" : "decrement";
+    let hoverState = icon === "increment" ? incrementHover : decrementHover;
+
+    if (hoverState === false) {
+      return `${
+        import.meta.env.BASE_URL
+      }/images/icon-${iconSymbol}-quantity.svg`;
+    } else {
+      return `${import.meta.env.BASE_URL}/images/hover-${iconSymbol}.svg`;
+    }
+  };
   const innerButtons = (clickEvent, btn) => {
+    const hovered =
+      btn === "increment"
+        ? () => isIncrementHovered(true)
+        : () => isDecrementHovered(true);
+
+    const notHovered =
+      btn === "increment"
+        ? () => isIncrementHovered(false)
+        : () => isDecrementHovered(false);
     return (
-      <div
-        className={`mx-4.5 h-fit w-fit outline-2 outline-white rounded-full ${activeQuantityDiv} flex justify-center items-center p-1`}
+      <img
+        className={`w-5 p-1 h-5 mx-4.5 outline-2 outline-white rounded-full ${activeQuantityDiv}`}
+        src={innerImage(btn)}
+        onMouseEnter={hovered}
+        onMouseLeave={notHovered}
         onClick={clickEvent}
-      >
-        <img
-          className={`w-3 h-3 `}
-          src={
-            btn === "increment"
-              ? `${import.meta.env.BASE_URL}/images/icon-increment-quantity.svg`
-              : `${import.meta.env.BASE_URL}/images/icon-decrement-quantity.svg`
-          }
-        />
-      </div>
+      />
     );
   };
   // * active state styles
@@ -73,8 +92,6 @@ const ProductCard = ({ product, filteredCart }) => {
 
   const activeQuantityDiv =
     "hover:cursor-pointer hover:outline hover:outline-main-red hover:bg-white";
-
-  const activeInnerBtn = "hover:cursor-pointer hover:bg-main-red";
 
   return (
     <article key={name} className="min-h-72 max-h-96 max-w-[320px]">
