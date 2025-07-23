@@ -138,6 +138,7 @@ function App() {
                         alt=""
                         onMouseEnter={() => setHoverRemove(index)}
                         onMouseLeave={() => setHoverRemove(null)}
+                        tabIndex={0}
                       />
                     </div>
                   </motion.div>

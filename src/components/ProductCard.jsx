@@ -83,6 +83,7 @@ const ProductCard = ({ product, filteredCart }) => {
         onMouseEnter={hovered}
         onMouseLeave={notHovered}
         onClick={clickEvent}
+        tabIndex={0}
       />
     );
   };
@@ -91,7 +92,7 @@ const ProductCard = ({ product, filteredCart }) => {
     "hover:cursor-pointer hover:outline hover:outline-main-red hover:text-main-red";
 
   const activeQuantityDiv =
-    "hover:cursor-pointer hover:outline hover:outline-main-red hover:bg-white";
+    "hover:cursor-pointer hover:outline hover:outline-main-red hover:bg-white focus-visible:ring-3 focus-visible:ring-black";
 
   return (
     <article key={name} className="min-h-72 max-h-96 max-w-[320px]">

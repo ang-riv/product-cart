@@ -1,7 +1,7 @@
 // return mobile or tab/desktop based on size
 import { AnimatePresence, motion } from "motion/react";
 const Modal = ({ currentCart, numOfItems, onClick }) => {
-  //
+  const cartMessage = "We hope you enjoy your food!";
   return (
     <>
       <div className="absolute z-10 top-0 bottom-0 left-0 right-0 bg-gray-950 opacity-30"></div>
@@ -22,7 +22,7 @@ const Modal = ({ currentCart, numOfItems, onClick }) => {
           <h4 className="text-blush-900 font-bold text-4xl mt-6">
             Order Confirmed
           </h4>
-          <p className="text-blush-500 mt-2">We hope you enjoy your food!</p>
+          <p className="text-blush-500 mt-2">{cartMessage}</p>
           <div className="w-full rounded-lg bg-blush-50 h-fit my-8 p-4">
             {currentCart.map((item, index) => {
               const itemImage = item.image;
