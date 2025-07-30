@@ -27,7 +27,8 @@ function App() {
   }, [cart]);
 
   // product grid
-  const gridStyles = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ";
+  const gridStyles =
+    "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 min-[375px]:gap-y-10 md:gap-y-8";
 
   // remove from cart
   const handleRemove = (product) => {
@@ -76,7 +77,7 @@ function App() {
           <section className="w-full justify-center flex flex-col items-center md:justify-start">
             <h1 className="pb-5 w-full font-bold">{appTitle}</h1>
             <div className=" w-full flex justify-center sm:justify-start">
-              <div className={`w-fit h-fit gap-4 ${gridStyles}`}>
+              <div className={`w-fit h-fit gap-x-4 gap-y-6 ${gridStyles}`}>
                 {products.map((product, index) => (
                   <ProductCard
                     key={index}
