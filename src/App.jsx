@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import data from "./data.json";
-import { motion, AnimatePresence } from "motion/react";
+import { AnimatePresence } from "motion/react";
 import Modal from "./components/Modal";
 import ProductCard from "./components/ProductCard";
 import { CartContext } from "./components/CartContext";
@@ -11,7 +11,6 @@ function App() {
   const products = data;
   const [filteredCart, setFilteredCart] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [hoverRemove, setHoverRemove] = useState(null);
 
   useEffect(() => {
     // find only the products that are not zero
@@ -30,15 +29,6 @@ function App() {
   // product grid
   const gridStyles =
     "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 min-[375px]:gap-y-10 md:gap-y-8";
-
-  // remove from cart
-  const handleRemove = (product) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.name === product.name ? { ...item, amount: 0 } : item
-      )
-    );
-  };
 
   // adding up the items
   const numOfItems = (category) => {

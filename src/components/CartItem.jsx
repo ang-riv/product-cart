@@ -3,7 +3,8 @@ import { CartContext } from "./CartContext";
 import { motion } from "motion/react";
 const CartItem = ({ product, index }) => {
   const [hoverRemove, setHoverRemove] = useState(null);
-  const { cart, setCart } = useContext(CartContext);
+  const { setCart } = useContext(CartContext);
+
   const handleRemove = (product) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
@@ -11,6 +12,7 @@ const CartItem = ({ product, index }) => {
       )
     );
   };
+
   return (
     <motion.div
       animate={{ scale: 1, opacity: 1 }}
