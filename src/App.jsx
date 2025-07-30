@@ -1,15 +1,16 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import data from "./data.json";
 import { motion, AnimatePresence } from "motion/react";
 import Modal from "./components/Modal";
 import ProductCard from "./components/ProductCard";
 import { CartContext } from "./components/CartContext";
+import CartItem from "./components/CartItem";
 function App() {
   const { cart, setCart } = useContext(CartContext);
   const appTitle = "Desserts";
   const products = data;
   const [filteredCart, setFilteredCart] = useState([]);
-  const [showM, setShowM] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [hoverRemove, setHoverRemove] = useState(null);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ function App() {
   };
 
   const handleReset = () => {
-    setShowM(false);
+    setShowModal(false);
     setCart([]);
     setFilteredCart([]);
   };
@@ -65,7 +66,7 @@ function App() {
   return (
     <>
       <div className="min-h-screen px-5 flex flex-col justify-between items-center bg-blush-50 relative">
-        {showM && (
+        {showModal && (
           <Modal
             currentCart={filteredCart}
             numOfItems={numOfItems("orderTotal")}
@@ -76,7 +77,7 @@ function App() {
           {/* products */}
           <section className="w-full justify-center flex flex-col items-center md:justify-start">
             <h1 className="pb-5 w-full font-bold">{appTitle}</h1>
-            <div className=" w-full flex justify-center sm:justify-start">
+            <div className="w-full flex justify-center sm:justify-start">
               <div className={`w-fit h-fit gap-x-4 gap-y-6 ${gridStyles}`}>
                 {products.map((product, index) => (
                   <ProductCard
@@ -97,52 +98,11 @@ function App() {
               {/* products in cart */}
               <AnimatePresence mode="sync">
                 {filteredCart.map((product, index) => (
-                  <motion.div
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    key={index}
-                    className="w-full h-20 flex justify-between border-b-1 border-gray-200"
-                  >
-                    <div className="flex flex-col justify-center">
-                      <p className="text-sm font-semibold text-blush-900 mb-2">
-                        {product.name}
-                      </p>
-                      <div className="flex w-full">
-                        <p className="w-9 font-semibold text-main-red">
-                          {product.amount}x
-                        </p>
-                        <p className="mr-2 text-blush-500">
-                          @ {product.price.toFixed(2)}
-                        </p>
-                        <p className=" font-semibold text-blush-500">
-                          ${(product.amount * product.price).toFixed(2)}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex justify-center items-center h-full">
-                      <img
-                        src={
-                          hoverRemove === index
-                            ? `${
-                                import.meta.env.BASE_URL
-                              }/images/hover-remove.svg`
-                            : `${
-                                import.meta.env.BASE_URL
-                              }/images/icon-remove-item.svg`
-                        }
-                        className={`size-5.5 hover:cursor-pointer border rounded-4xl p-0.5 ${
-                          hoverRemove === index
-                            ? "border-black"
-                            : "border-blush-400"
-                        }`}
-                        onClick={() => handleRemove(product)}
-                        alt=""
-                        onMouseEnter={() => setHoverRemove(index)}
-                        onMouseLeave={() => setHoverRemove(null)}
-                        tabIndex={0}
-                      />
-                    </div>
-                  </motion.div>
+                  <CartItem
+                    product={product}
+                    index={index}
+                    key={`${product}-${index}`}
+                  />
                 ))}
               </AnimatePresence>
               {/* cart */}
@@ -170,7 +130,7 @@ function App() {
                   </div>
                   <button
                     className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 mt-5.5 hover:bg-red-900 hover:cursor-pointer"
-                    onClick={() => setShowM(true)}
+                    onClick={() => setShowModal(true)}
                   >
                     Confirm Order
                   </button>
