@@ -13,6 +13,12 @@ const CartItem = ({ product, index }) => {
     );
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleRemove(product);
+    }
+  };
   return (
     <motion.div
       animate={{ scale: 1, opacity: 1 }}
@@ -43,7 +49,9 @@ const CartItem = ({ product, index }) => {
             hoverRemove === index ? "border-black" : "border-blush-400"
           }`}
           onClick={() => handleRemove(product)}
+          onKeyDown={handleKeyDown}
           alt=""
+          role="button"
           onMouseEnter={() => setHoverRemove(index)}
           onMouseLeave={() => setHoverRemove(null)}
           tabIndex={0}
