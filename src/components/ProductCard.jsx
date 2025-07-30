@@ -76,6 +76,13 @@ const ProductCard = ({ product, filteredCart }) => {
       btn === "increment"
         ? () => isIncrementHovered(false)
         : () => isDecrementHovered(false);
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        clickEvent();
+      }
+    };
     return (
       <img
         className={`w-5 p-1 h-5 mx-4.5 outline-2 outline-white rounded-full ${activeQuantityDiv}`}
@@ -84,6 +91,8 @@ const ProductCard = ({ product, filteredCart }) => {
         onMouseLeave={notHovered}
         onClick={clickEvent}
         tabIndex={0}
+        role="button"
+        onKeyDown={handleKeyDown}
       />
     );
   };
