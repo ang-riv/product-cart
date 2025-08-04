@@ -101,9 +101,14 @@ function App() {
                 <div>
                   <div className="flex justify-between items-center py-5.5">
                     <p className="text-blush-900">Order Total </p>
-                    <p className="font-bold text-3xl text-blush-900">
-                      ${numOfItems("orderTotal")}
-                    </p>
+                    <div aria-live="polite">
+                      <p
+                        className="font-bold text-3xl text-blush-900"
+                        aria-live="polite"
+                      >
+                        ${numOfItems("orderTotal")}
+                      </p>
+                    </div>
                   </div>
                   <div className="bg-blush-100 w-full py-4 flex justify-center items-center rounded-lg">
                     <img
