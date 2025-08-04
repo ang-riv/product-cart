@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { CartContext } from "./CartContext";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 const CartItem = ({ product, index }) => {
+  const reducedMotion = useReducedMotion();
   const [hoverRemove, setHoverRemove] = useState(null);
   const { setCart } = useContext(CartContext);
 
@@ -22,7 +23,7 @@ const CartItem = ({ product, index }) => {
   return (
     <motion.div
       animate={{ scale: 1, opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: reducedMotion ? 1 : 0 }}
       key={index}
       className="w-full h-20 flex justify-between border-b-1 border-gray-200"
     >
