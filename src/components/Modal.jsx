@@ -1,13 +1,40 @@
 // return mobile or tab/desktop based on size
 import { AnimatePresence, motion } from "motion/react";
-const Modal = ({ currentCart, numOfItems, onClick }) => {
+import { useEffect, useRef } from "react";
+const Modal = ({ currentCart, numOfItems, onClick, showModal }) => {
   const cartMessage = "We hope you enjoy your food!";
+  const buttonRef = useRef(null);
+  useEffect(() => {
+    if (showModal === true) {
+      const button = buttonRef.current;
+      button?.focus();
+
+      const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+          onClick();
+        }
+
+        if (e.key === "Tab") {
+          e.preventDefault();
+          button?.focus();
+        }
+      };
+
+      document.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [showModal, onClick]);
   return (
     <>
       <div className="absolute z-10 top-0 bottom-0 left-0 right-0 bg-gray-950 opacity-30"></div>
       {/*  */}
       <AnimatePresence mode="sync">
         <motion.div
+          role="alertdialog"
+          aria-modal="true"
           key="modal"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -17,7 +44,7 @@ const Modal = ({ currentCart, numOfItems, onClick }) => {
         >
           <img
             src={`${import.meta.env.BASE_URL}/images/icon-order-confirmed.svg`}
-            alt="checkmark icon"
+            aria-hidden="true"
           />
           <h4 className="text-blush-900 font-bold text-4xl mt-6">
             Order Confirmed
@@ -31,7 +58,7 @@ const Modal = ({ currentCart, numOfItems, onClick }) => {
                   <div className="flex h-14">
                     <img
                       src={`${import.meta.env.BASE_URL}${itemImage.thumbnail}`}
-                      alt="item thumbnail"
+                      alt={`${item.name} thumbnail`}
                       className="h-12 w-12 rounded-lg mr-4"
                     />
                     <div className="flex flex-2 flex-col justify-around text-sm">
@@ -54,6 +81,7 @@ const Modal = ({ currentCart, numOfItems, onClick }) => {
             </div>
           </div>
           <button
+            ref={buttonRef}
             className=" text-blush-100 font-semibold w-full rounded-4xl bg-main-red text-center py-4 hover:cursor-pointer hover:bg-red-900"
             onClick={onClick}
           >

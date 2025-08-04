@@ -50,7 +50,7 @@ const CartItem = ({ product, index }) => {
           }`}
           onClick={() => handleRemove(product)}
           onKeyDown={handleKeyDown}
-          alt=""
+          alt={`Remove ${product.name} from cart`}
           role="button"
           onMouseEnter={() => setHoverRemove(index)}
           onMouseLeave={() => setHoverRemove(null)}

@@ -87,6 +87,7 @@ const ProductCard = ({ product, filteredCart }) => {
       <img
         className={`w-5 p-1 h-5 mx-4.5 outline-2 outline-white rounded-full ${activeQuantityDiv}`}
         src={innerImage(btn)}
+        alt={`${btn} ${name} in quantity`}
         onMouseEnter={hovered}
         onMouseLeave={notHovered}
         onClick={clickEvent}
@@ -138,7 +139,6 @@ const ProductCard = ({ product, filteredCart }) => {
               <img
                 src={`${import.meta.env.BASE_URL}/images/icon-add-to-cart.svg`}
                 className="mr-1"
-                alt=""
                 aria-hidden="true"
               />
               <p>Add to Cart</p>

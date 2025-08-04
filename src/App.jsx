@@ -61,6 +61,7 @@ function App() {
             currentCart={filteredCart}
             numOfItems={numOfItems("orderTotal")}
             onClick={handleReset}
+            showModal={showModal}
           />
         )}
         <main className="h-[95%] w-full flex justify-between flex-wrap md:flex-nowrap max-w-[1200px] py-[5%] relative">
@@ -110,7 +111,6 @@ function App() {
                       src={`${
                         import.meta.env.BASE_URL
                       }/images/icon-carbon-neutral.svg`}
-                      alt=""
                       aria-hidden="true"
                     />
                     <p className="text-sm text-center text-blush-900">
@@ -132,6 +132,7 @@ function App() {
                       import.meta.env.BASE_URL
                     }/images/illustration-empty-cart.svg`}
                     className="max-h-56 mb-5"
+                    alt="cartoon cakes as a placeholder"
                   />
                   <p className="text-sm text-blush-500 font-semibold">
                     Your added items will appear here
